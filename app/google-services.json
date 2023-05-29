@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "734546041294",
+    "project_id": "barta-c889f",
+    "storage_bucket": "barta-c889f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:734546041294:android:8cf25ff2cdfd825e1c739f",
+        "android_client_info": {
+          "package_name": "com.learnwithsajib.barta"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5EZgiDZ7hyZSHVkB69Uye5dPR9O2ytKg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
