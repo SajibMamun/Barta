@@ -9,9 +9,10 @@
     android:id="@+id/drawerlayoutid"
     android:fitsSystemWindows="true">
 
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     >
 
 <include
@@ -20,18 +21,15 @@
 
 
 
-    <androidx.fragment.app.FragmentContainerView
+    <fragment
         android:id="@+id/fragmentContainerView"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:navGraph="@navigation/left_nav" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
 
 
 <com.google.android.material.navigation.NavigationView
@@ -39,7 +37,7 @@
     android:layout_height="match_parent"
     android:layout_gravity="start"
     app:headerLayout="@layout/nav_header"
-    android:fitsSystemWindows="true"
+    android:fitsSystemWindows="false"
     app:menu="@menu/left_menu"
     android:id="@+id/navViewid"
    />

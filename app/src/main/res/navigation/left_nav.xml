@@ -8,21 +8,21 @@
     <fragment
         android:id="@+id/online"
         android:name="com.learnwithsajib.barta.Online"
-        android:label="fragment_online"
+        android:label="Online"
         tools:layout="@layout/fragment_online" />
     <fragment
         android:id="@+id/notification"
         android:name="com.learnwithsajib.barta.Notification"
-        android:label="fragment_notification"
+        android:label="Notification"
         tools:layout="@layout/fragment_notification" />
     <fragment
         android:id="@+id/setting"
         android:name="com.learnwithsajib.barta.Setting"
-        android:label="fragment_setting"
+        android:label="Setting"
         tools:layout="@layout/fragment_setting" />
     <fragment
         android:id="@+id/profile"
         android:name="com.learnwithsajib.barta.Profile"
-        android:label="fragment_profile"
+        android:label="Profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>
