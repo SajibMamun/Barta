@@ -14,98 +14,97 @@ import com.learnwithsajib.barta.databinding.ActivityRegisterBinding
 
 class RegisterActivity : AppCompatActivity() {
     lateinit var binding: ActivityRegisterBinding
-    lateinit var mauth:FirebaseAuth
-    lateinit var myref: DatabaseReference
+
+    lateinit var mAuth: FirebaseAuth
+    lateinit var myRef: DatabaseReference
+    lateinit var userId: String
     lateinit var firebaseUser: FirebaseUser
-    lateinit var uid:String
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityRegisterBinding.inflate(layoutInflater)
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        mAuth = FirebaseAuth.getInstance()
 
-        mauth= FirebaseAuth.getInstance()
-        val database= Firebase.database
-        myref=database.reference.child("User")
+        val database = Firebase.database
+        myRef = database.reference.child("User")
+
 
 
 
         binding.loginheretv.setOnClickListener {
 
-            var intent= Intent(applicationContext,LoginActivity::class.java)
+            var intent = Intent(applicationContext, LoginActivity::class.java)
             startActivity(intent)
         }
-        
-        
-        binding.registerbtnid.setOnClickListener { 
-            var name:String=binding.Nameetid.text.toString().trim()
-            var contact:String=binding.contactetid.text.toString().trim()
-            var email:String=binding.emailetid.text.toString().trim()
-            var password:String=binding.Passwordetid.text.toString().trim()
-            var confirmpass:String=binding.ConfirmPasswordetid.text.toString().trim()
-        
-        if(name.isEmpty())
-        {
-            binding.Nameetid.error="Enter Name"
-        }
-            else if(contact.isEmpty()|| contact.length!=11)
-        {
-                binding.contactetid.error="Enter valid Number"
-        }   
-        else if(email.isEmpty())
-        {
-                binding.contactetid.error="Enter Email"
-        }
-        else if(password.isEmpty()||password.length!=8)
-        {
-            binding.contactetid.error="Enter 8 Digit Password"
-        }
-        else if(confirmpass.isEmpty()|| password != confirmpass)
-        {
-            binding.contactetid.error="Enter 8 Digit Password"
-        }
-            else
-        {
-            RegisterUser(email,password,name,contact)
-        }
-    
-        
+
+
+        binding.registerbtnid.setOnClickListener {
+            var name: String = binding.Nameetid.text.toString().trim()
+            var contact: String = binding.contactetid.text.toString().trim()
+            var email: String = binding.emailetid.text.toString().trim()
+            var password: String = binding.Passwordetid.text.toString().trim()
+            var confirmpass: String = binding.ConfirmPasswordetid.text.toString().trim()
+
+            if (name.isEmpty()) {
+                binding.Nameetid.error = "Enter Name"
+            } else if (contact.isEmpty() || contact.length != 11) {
+                binding.contactetid.error = "Enter valid Number"
+            } else if (email.isEmpty()) {
+                binding.contactetid.error = "Enter Email"
+            } else if (password.isEmpty() || password.length != 8) {
+                binding.contactetid.error = "Enter 8 Digit Password"
+            } else if (confirmpass.isEmpty() || password != confirmpass) {
+                binding.contactetid.error = "Enter 8 Digit Password"
+            } else {
+                registerUser(name, email, contact, password)
+            }
+
+
         }
     }
 
-    private fun RegisterUser(email: String, password: String, name: String, contact: String) {
-mauth.createUserWithEmailAndPassword(email,password)
-    .addOnCompleteListener {
-        if(it.isSuccessful)
-        {
-            firebaseUser=FirebaseAuth.getInstance().currentUser!!
-            uid=firebaseUser.uid
+    private fun registerUser(name: String, email: String, contact: String, password: String) {
 
-            val map= mapOf("name" to name, "email" to email, "phone" to contact, "password" to password)
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    Toast.makeText(applicationContext, "Register Successfully", Toast.LENGTH_SHORT)
+                        .show()
+                    firebaseUser = FirebaseAuth.getInstance().currentUser!!
+                    userId = firebaseUser.uid
 
-            if(uid!=null)
+                    val map = mapOf(
+                        "name" to name,
+                        "email" to email,
+                        "contact" to contact,
+                        "password" to password
+                    )
 
-            {
-                myref.child(uid).setValue(map).addOnCompleteListener {
-                    if(it.isSuccessful)
-                    {
-                        Toast.makeText(applicationContext,"Welcome",Toast.LENGTH_SHORT).show()
-                        var intent= Intent(applicationContext,MainActivity::class.java)
-                        startActivity(intent)
+
+                    if (userId != null) {
+                        myRef.child(userId).setValue(map).addOnCompleteListener {
+
+
+                     if(it.isSuccessful)
+                     {
+
+                         Toast.makeText(
+                             applicationContext, "Welcome ${name}", Toast.LENGTH_SHORT
+                         ).show()
+                         var intent = Intent(applicationContext, MainActivity::class.java)
+                         startActivity(intent)
+                     }
+
+                        }
                     }
-                    else
-                    {
-                        Toast.makeText(applicationContext,"${it.exception.toString()}",Toast.LENGTH_SHORT).show()
-
-                    }
+                } else {
+                    Toast.makeText(
+                        applicationContext, "${it.exception?.message}", Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
-        }
-    }
     }
 
 
