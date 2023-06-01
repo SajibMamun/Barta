@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:orientation="horizontal"
+        >
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="120dp"
+            android:layout_height="100dp"
+            android:src="@drawable/abc"
+            android:layout_margin="10dp"
+            android:id="@+id/profileimgid"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:id="@+id/usernameid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sajib Bin Mamun"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                />
+            <TextView
+                android:id="@+id/usercontactid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="01628778041"
+                android:textSize="16sp"
+               android:textColor="#009688"
+                android:layout_marginTop="5dp"
+                />
+            <Button
+                android:id="@+id/chatnowbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/baseline_chat_24"
+                android:text="Chat Now"/>
+
+        </LinearLayout>
+        
+        
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
