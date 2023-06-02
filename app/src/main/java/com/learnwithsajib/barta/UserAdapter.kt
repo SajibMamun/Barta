@@ -8,7 +8,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.learnwithsajib.barta.ModelClass.User
 import com.learnwithsajib.barta.databinding.ItemUserListBinding
 
-class UserAdapter:ListAdapter<User,UserAdapter.UserViewHolder>(comparator) {
+class UserAdapter(var user:UserAdapter.UserListener)
+    :ListAdapter<User,UserAdapter.UserViewHolder>(comparator) {
+
+
+    //interface create to pass data  to OnlineFragment
+
+    interface UserListener{
+        fun moveUser(user:User)
+
+    }
+
+
+
 
     class UserViewHolder(var binding: ItemUserListBinding):RecyclerView.ViewHolder(binding.root)
 
@@ -22,8 +34,8 @@ class UserAdapter:ListAdapter<User,UserAdapter.UserViewHolder>(comparator) {
           holder.binding.usernameid.text=it.name
           holder.binding.usercontactid.text=it.contact
 
-          holder.itemView.setOnClickListener {
-
+          holder.itemView.setOnClickListener {_ ->
+user.moveUser(it)
 
 
           }
