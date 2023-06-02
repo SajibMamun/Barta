@@ -61,7 +61,8 @@
         android:layout_marginRight="20dp"
         android:drawableLeft="@drawable/password"
         android:drawablePadding="10dp"
-        android:hint="password" />
+        android:hint="password"
+        android:inputType="textPassword"/>
 
 
     <Button
