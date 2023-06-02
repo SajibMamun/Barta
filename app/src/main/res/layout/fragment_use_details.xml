@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UseDetails"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="160dp"
+        android:layout_height="180dp"
+        android:src="@drawable/abc"
+        android:layout_gravity="center"
+        />
+
+    <TextView
+        android:id="@+id/Nameetid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:textSize="20sp"
+        android:layout_marginRight="20dp"
+        android:drawableLeft="@drawable/name"
+        android:drawablePadding="10dp"
+        android:hint="Name" />
+    <TextView
+        android:id="@+id/emailetid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:textSize="20sp"
+        android:drawableLeft="@drawable/email"
+        android:drawablePadding="10dp"
+        android:hint="Email" />
+    <TextView
+        android:id="@+id/contactetid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:drawableLeft="@drawable/phonenumber"
+        android:drawablePadding="10dp"
+        android:hint="Phone" />
+
+    <TextView
+        android:id="@+id/Passwordetid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:drawableLeft="@drawable/password"
+        android:drawablePadding="10dp"
+        android:hint="password"
+        android:inputType="textPassword"/>
+
+
+
+        />
+
+</LinearLayout>

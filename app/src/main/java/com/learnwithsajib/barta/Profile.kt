@@ -20,18 +20,7 @@ class Profile : Fragment() {
         binding = FragmentProfileBinding.inflate(layoutInflater,container,false)
 
 
-        var userEmail:String=requireArguments().getString("email").toString()
-        var userName:String=requireArguments().getString("name").toString()
-        var userContact:String=requireArguments().getString("contact").toString()
-        var userPassword:String=requireArguments().getString("password").toString()
 
-        fun String.toEditable(): Editable =  Editable.Factory.getInstance().newEditable(this)
-
-
-        binding.emailetid.text=userEmail.toEditable()
-        binding.Nameetid.text=userName.toEditable()
-        binding.contactetid.text=userContact.toEditable()
-        binding.Passwordetid.text=userPassword.toEditable()
 
 
 

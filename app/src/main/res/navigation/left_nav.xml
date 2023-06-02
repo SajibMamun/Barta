@@ -19,25 +19,37 @@
         <action
             android:id="@+id/action_online_to_setting"
             app:destination="@id/setting" />
+        <action
+            android:id="@+id/action_online_to_useDetails"
+            app:destination="@id/useDetails" />
 
     </fragment>
     <fragment
         android:id="@+id/notification"
         android:name="com.learnwithsajib.barta.Notification"
         android:label="Notification"
-        tools:layout="@layout/fragment_notification" />
+        tools:layout="@layout/fragment_notification" >
+
+    </fragment>
     <fragment
         android:id="@+id/setting"
         android:name="com.learnwithsajib.barta.Setting"
         android:label="Setting"
-        tools:layout="@layout/fragment_setting" />
+        tools:layout="@layout/fragment_setting" >
+
+    </fragment>
+
     <fragment
         android:id="@+id/profile"
         android:name="com.learnwithsajib.barta.Profile"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" >
-        <action
-            android:id="@+id/action_profile_to_online"
-            app:destination="@id/online" />
+
+
     </fragment>
+    <fragment
+        android:id="@+id/useDetails"
+        android:name="com.learnwithsajib.barta.UseDetails"
+        android:label="fragment_use_details"
+        tools:layout="@layout/fragment_use_details" />
 </navigation>

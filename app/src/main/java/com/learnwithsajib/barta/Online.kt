@@ -89,7 +89,7 @@ class Online : Fragment(), UserAdapter.UserListener {
 
 
 
-        findNavController().navigate(R.id.action_online_to_profile,bundle)
+        findNavController().navigate(R.id.action_online_to_useDetails,bundle)
 
     }
 
