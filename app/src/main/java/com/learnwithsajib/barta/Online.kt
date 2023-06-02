@@ -48,10 +48,7 @@ class Online : Fragment() {
                 snapshot.children.forEach {
                     var user:User=it.getValue(User::class.java)!!
 
-
                             userList.add(user)
-
-
 
                     }
 

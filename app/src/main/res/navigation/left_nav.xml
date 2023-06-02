@@ -9,7 +9,18 @@
         android:id="@+id/online"
         android:name="com.learnwithsajib.barta.Online"
         android:label="Online"
-        tools:layout="@layout/fragment_online" />
+        tools:layout="@layout/fragment_online" >
+        <action
+            android:id="@+id/action_online_to_profile"
+            app:destination="@id/profile" />
+        <action
+            android:id="@+id/action_online_to_notification"
+            app:destination="@id/notification" />
+        <action
+            android:id="@+id/action_online_to_setting"
+            app:destination="@id/setting" />
+
+    </fragment>
     <fragment
         android:id="@+id/notification"
         android:name="com.learnwithsajib.barta.Notification"
@@ -24,5 +35,9 @@
         android:id="@+id/profile"
         android:name="com.learnwithsajib.barta.Profile"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profile_to_online"
+            app:destination="@id/online" />
+    </fragment>
 </navigation>

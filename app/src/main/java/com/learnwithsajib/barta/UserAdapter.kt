@@ -21,6 +21,12 @@ class UserAdapter:ListAdapter<User,UserAdapter.UserViewHolder>(comparator) {
 
           holder.binding.usernameid.text=it.name
           holder.binding.usercontactid.text=it.contact
+
+          holder.itemView.setOnClickListener {
+
+
+
+          }
       }
     }
 
