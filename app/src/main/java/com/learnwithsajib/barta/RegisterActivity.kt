@@ -97,6 +97,7 @@ class RegisterActivity : AppCompatActivity() {
                          ).show()
                          var intent = Intent(applicationContext, MainActivity::class.java)
                          startActivity(intent)
+                         finish()
                      }
 
                         }

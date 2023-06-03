@@ -30,6 +30,7 @@ class LoginActivity : AppCompatActivity() {
         if (firebaseUser != null) {
             var intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
 
@@ -65,6 +66,7 @@ class LoginActivity : AppCompatActivity() {
                         .show()
                     var intent = Intent(applicationContext, MainActivity::class.java)
                     startActivity(intent)
+                    finish()
 
                 } else {
                     Toast.makeText(applicationContext, "${it.exception?.message}", Toast.LENGTH_LONG)

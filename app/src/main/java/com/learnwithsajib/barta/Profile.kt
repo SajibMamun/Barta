@@ -1,6 +1,7 @@
 package com.learnwithsajib.barta
 
 import android.app.Activity
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.navigation.fragment.findNavController
 import coil.load
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.auth.FirebaseAuth
@@ -110,29 +112,35 @@ class Profile : Fragment() {
         //
 
 
+        //signout
+        binding.logoutbtn.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            startActivity(intent)
+        }
 
 
         //update value
 
-            binding.UpdateProfilebtn.setOnClickListener {
-                val map= mapOf(
+        binding.UpdateProfilebtn.setOnClickListener {
+            val map = mapOf(
                 "name" to binding.Nameetid.text.toString().trim(),
                 "email" to binding.emailetid.text.toString().trim(),
                 "contact" to binding.contactetid.text.toString().trim(),
                 "password" to binding.Passwordetid.text.toString().trim()
-                )
+            )
 
-                val database = Firebase.database
-                firebaseDatabaseReference =
-                    database.reference.child("User").child(mAuth.uid.toString())
+            val database = Firebase.database
+            firebaseDatabaseReference =
+                database.reference.child("User").child(mAuth.uid.toString())
 
 
-                firebaseDatabaseReference.updateChildren(map)
-                    .addOnSuccessListener {
-                        Toast.makeText(requireContext(), "Profile Updated", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-            }
+            firebaseDatabaseReference.updateChildren(map)
+                .addOnSuccessListener {
+                    Toast.makeText(requireContext(), "Profile Updated", Toast.LENGTH_SHORT)
+                        .show()
+                }
+        }
 
 
 
@@ -192,29 +200,27 @@ class Profile : Fragment() {
                                 .show()
                         }
 
-                    database.reference.child("User").child(mAuth.uid.toString()).addValueEventListener(
-                        object: ValueEventListener{
-                            override fun onDataChange(snapshot: DataSnapshot) {
-                                var user: User = snapshot.getValue(User::class.java)!!
-                                binding.profileimgid.load(user.profileImgUrl)
+                    database.reference.child("User").child(mAuth.uid.toString())
+                        .addValueEventListener(
+                            object : ValueEventListener {
+                                override fun onDataChange(snapshot: DataSnapshot) {
+                                    var user: User = snapshot.getValue(User::class.java)!!
+                                    binding.profileimgid.load(user.profileImgUrl)
+
+                                }
+
+                                override fun onCancelled(error: DatabaseError) {
+                                    TODO("Not yet implemented")
+                                }
 
                             }
-
-                            override fun onCancelled(error: DatabaseError) {
-                                TODO("Not yet implemented")
-                            }
-
-                        }
-                    )
-
-
+                        )
 
 
                 }
             }
         }
     }
-
 
 
     companion object {
