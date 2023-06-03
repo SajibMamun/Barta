@@ -7,9 +7,10 @@
     android:orientation="vertical">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profileimgid"
         android:layout_width="160dp"
         android:layout_height="180dp"
-        android:src="@drawable/abc"
+        android:src="@drawable/user"
         android:layout_gravity="center"
         />
     <androidx.appcompat.widget.AppCompatButton

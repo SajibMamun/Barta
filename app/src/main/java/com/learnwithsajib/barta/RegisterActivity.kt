@@ -79,7 +79,9 @@ class RegisterActivity : AppCompatActivity() {
                         "name" to name,
                         "email" to email,
                         "contact" to contact,
-                        "password" to password
+                        "password" to password,
+                        "userId" to userId,
+                        "profileImgUrl" to "Not Uploaded"
                     )
 
 

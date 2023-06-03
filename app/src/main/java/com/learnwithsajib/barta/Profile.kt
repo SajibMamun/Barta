@@ -43,6 +43,10 @@ class Profile : Fragment() {
                 //Image Uri will not be null for RESULT_OK
                 val fileUri = data?.data!!
 
+
+                ///load data
+                binding.profileimgid.setImageURI(fileUri)
+
             } else if (resultCode == ImagePicker.RESULT_ERROR) {
 
             } else {
