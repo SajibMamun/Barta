@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.learnwithsajib.barta.ModelClass.User
 import com.learnwithsajib.barta.databinding.ItemUserListBinding
 
@@ -33,6 +34,7 @@ class UserAdapter(var user:UserAdapter.UserListener)
 
           holder.binding.usernameid.text=it.name
           holder.binding.usercontactid.text=it.contact
+          holder.binding.profileimgid.load(it.profileImgUrl)
 
           holder.itemView.setOnClickListener {_ ->
 user.moveUser(it)

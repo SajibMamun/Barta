@@ -1,6 +1,7 @@
 package com.learnwithsajib.barta
 
 import android.app.Activity
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import androidx.fragment.app.Fragment
@@ -10,13 +11,20 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import coil.load
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.android.gms.auth.api.signin.internal.Storage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -28,9 +36,19 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.learnwithsajib.barta.ModelClass.User
 import com.learnwithsajib.barta.databinding.FragmentOnlineBinding
 import com.learnwithsajib.barta.databinding.FragmentProfileBinding
+import java.net.URI
 
 
 class Profile : Fragment() {
+
+    lateinit var binding: FragmentProfileBinding
+
+    lateinit var firebaseStorage: StorageReference
+
+    lateinit var fileUri: Uri
+
+
+    lateinit var firebaseDatabaseReference: DatabaseReference
 
 
     //////Img uri catch
@@ -41,11 +59,14 @@ class Profile : Fragment() {
 
             if (resultCode == Activity.RESULT_OK) {
                 //Image Uri will not be null for RESULT_OK
-                val fileUri = data?.data!!
+                fileUri = data?.data!!
 
 
                 ///load data
                 binding.profileimgid.setImageURI(fileUri)
+
+                binding.pickimagebtn.text = UPLOAD
+
 
             } else if (resultCode == ImagePicker.RESULT_ERROR) {
 
@@ -55,7 +76,6 @@ class Profile : Fragment() {
         }
 
 
-    lateinit var binding: FragmentProfileBinding
     lateinit var mAuth: FirebaseAuth
     var firebaseUser: FirebaseUser? = null
     override fun onCreateView(
@@ -82,6 +102,7 @@ class Profile : Fragment() {
                     binding.emailetid.text = user.email.toEditable()
                     binding.contactetid.text = user.contact.toEditable()
                     binding.Passwordetid.text = user.password.toEditable()
+                    binding.profileimgid.load(user.profileImgUrl)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -93,12 +114,17 @@ class Profile : Fragment() {
         //
 
 
-
-
+        firebaseStorage = FirebaseStorage.getInstance().getReference("Upload")
 
 
         binding.pickimagebtn.setOnClickListener {
-            requestPermissions()
+
+            if (binding.pickimagebtn.text == UPLOAD) {
+                startImageUpload()
+
+            } else {
+                requestPermissions()
+            }
         }
 
 
@@ -108,6 +134,64 @@ class Profile : Fragment() {
 
         return binding.root
 
+
+    }
+
+    private fun startImageUpload() {
+        var storageReference: StorageReference =
+            firebaseStorage.child("Profile").child("profile-img-${mAuth.uid.toString()}")
+
+        storageReference.putFile(fileUri).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                storageReference.downloadUrl.addOnSuccessListener {
+
+
+                    var url: String = it.toString()
+
+                    //send to datatbase
+
+                    val map = mapOf(
+                        "profileImgUrl" to url
+                    )
+
+                    val database = Firebase.database
+                    firebaseDatabaseReference =
+                        database.reference.child("User").child(mAuth.uid.toString())
+
+
+                    firebaseDatabaseReference.updateChildren(map)
+                        .addOnSuccessListener { profileurl ->
+                            Toast.makeText(requireContext(), "Image Uploaded", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+
+                    database.reference.child("User").child(mAuth.uid.toString()).addValueEventListener(
+                        object: ValueEventListener{
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                var user: User = snapshot.getValue(User::class.java)!!
+                                binding.profileimgid.load(user.profileImgUrl)
+
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+                                TODO("Not yet implemented")
+                            }
+
+                        }
+                    )
+
+
+
+
+                }
+            }
+        }
+    }
+
+
+
+    companion object {
+        var UPLOAD = "Upload"
 
     }
 

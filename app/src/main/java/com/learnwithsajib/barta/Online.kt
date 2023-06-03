@@ -77,6 +77,7 @@ class Online : Fragment(), UserAdapter.UserListener {
         var userName=user.name
         var userContact=user.contact
         var userPassword=user.password
+        var userImage=user.profileImgUrl
 
 
         var bundle=Bundle()
@@ -84,6 +85,7 @@ class Online : Fragment(), UserAdapter.UserListener {
         bundle.putString("name",userName)
         bundle.putString("contact",userContact)
         bundle.putString("password",userPassword)
+        bundle.putString("image",userImage)
 
 
 

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import coil.load
 import com.learnwithsajib.barta.databinding.FragmentUseDetailsBinding
 
 
@@ -26,12 +27,14 @@ class UseDetails : Fragment() {
         var userName:String=requireArguments().getString("name").toString()
         var userContact:String=requireArguments().getString("contact").toString()
         var userPassword:String=requireArguments().getString("password").toString()
+        var userImage:String=requireArguments().getString("image").toString()
 
 
         binding.emailetid.text=userEmail
         binding.Nameetid.text=userName
         binding.contactetid.text=userContact
         binding.Passwordetid.text=userPassword
+        binding.profileimgid.load(userImage)
 
         return binding.root
     }
