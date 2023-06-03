@@ -50,6 +50,6 @@
     <fragment
         android:id="@+id/useDetails"
         android:name="com.learnwithsajib.barta.UseDetails"
-        android:label="fragment_use_details"
+        android:label="User"
         tools:layout="@layout/fragment_use_details" />
 </navigation>

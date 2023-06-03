@@ -15,8 +15,8 @@
     <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Upload"
-        android:id="@+id/uploadbtnid"
+        android:text="Pick a Image"
+        android:id="@+id/pickimagebtn"
         android:visibility="visible"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
