@@ -37,6 +37,9 @@ class Online : Fragment(), UserAdapter.UserListener {
         firebaseUser=FirebaseAuth.getInstance().currentUser
 
 
+
+
+
         return binding.root
     }
 
@@ -78,6 +81,10 @@ class Online : Fragment(), UserAdapter.UserListener {
             })
     }
 
+
+    override fun moveusertoConversation(user: User) {
+        findNavController().navigate(R.id.action_online_to_chat_Fragment)
+    }
 
     override fun moveUser(user: User) {
 

@@ -9,53 +9,60 @@ import coil.load
 import com.learnwithsajib.barta.ModelClass.User
 import com.learnwithsajib.barta.databinding.ItemUserListBinding
 
-class UserAdapter(var user:UserAdapter.UserListener)
-    :ListAdapter<User,UserAdapter.UserViewHolder>(comparator) {
+class UserAdapter(var user: UserAdapter.UserListener) :
+    ListAdapter<User, UserAdapter.UserViewHolder>(comparator) {
 
 
     //interface create to pass data  to OnlineFragment
 
-    interface UserListener{
-        fun moveUser(user:User)
+    interface UserListener {
+        fun moveUser(user: User)
+        fun moveusertoConversation(user: User)
 
     }
 
 
-
-
-    class UserViewHolder(var binding: ItemUserListBinding):RecyclerView.ViewHolder(binding.root)
+    class UserViewHolder(var binding: ItemUserListBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
-    return UserViewHolder(ItemUserListBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return UserViewHolder(
+            ItemUserListBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-      getItem(position).let {
+        getItem(position).let {
 
-          holder.binding.usernameid.text=it.name
-          holder.binding.usercontactid.text=it.contact
-          holder.binding.profileimgid.load(it.profileImgUrl)
+            holder.binding.usernameid.text = it.name
+            holder.binding.usercontactid.text = it.contact
+            holder.binding.profileimgid.load(it.profileImgUrl)
 
-          holder.itemView.setOnClickListener {_ ->
-user.moveUser(it)
+            holder.itemView.setOnClickListener { _ ->
+                user.moveUser(it)
+            }
 
-
-          }
-      }
-    }
-
-
-    companion object
-    {
-        var comparator=object :DiffUtil.ItemCallback<User>(){
-            override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
-               return oldItem.contact==newItem.contact
+            holder.binding.chatnowbtn.setOnClickListener { _ ->
+                user.moveusertoConversation(it)
             }
 
 
+        }
+    }
+
+
+    companion object {
+        var comparator = object : DiffUtil.ItemCallback<User>() {
+            override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
+                return oldItem.contact == newItem.contact
+            }
+
 
             override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
-              return oldItem==newItem
+                return oldItem == newItem
             }
 
         }
