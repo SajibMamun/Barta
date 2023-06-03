@@ -110,6 +110,37 @@ class Profile : Fragment() {
         //
 
 
+
+
+        //update value
+
+            binding.UpdateProfilebtn.setOnClickListener {
+                val map= mapOf(
+                "name" to binding.Nameetid.text.toString().trim(),
+                "email" to binding.emailetid.text.toString().trim(),
+                "contact" to binding.contactetid.text.toString().trim(),
+                "password" to binding.Passwordetid.text.toString().trim()
+                )
+
+                val database = Firebase.database
+                firebaseDatabaseReference =
+                    database.reference.child("User").child(mAuth.uid.toString())
+
+
+                firebaseDatabaseReference.updateChildren(map)
+                    .addOnSuccessListener {
+                        Toast.makeText(requireContext(), "Profile Updated", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+            }
+
+
+
+
+
+
+
+
         firebaseStorage = FirebaseStorage.getInstance().getReference("Upload")
 
 
