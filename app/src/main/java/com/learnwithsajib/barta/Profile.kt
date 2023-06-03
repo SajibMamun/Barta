@@ -13,7 +13,6 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import coil.load
 import com.github.dhaval2404.imagepicker.ImagePicker
-import com.google.android.gms.auth.api.signin.internal.Storage
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -33,10 +32,7 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 
 
-import com.learnwithsajib.barta.ModelClass.User
-import com.learnwithsajib.barta.databinding.FragmentOnlineBinding
 import com.learnwithsajib.barta.databinding.FragmentProfileBinding
-import java.net.URI
 
 
 class Profile : Fragment() {

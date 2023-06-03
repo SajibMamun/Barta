@@ -2,9 +2,6 @@ package com.learnwithsajib.barta
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.view.View
-import android.widget.TextView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -19,10 +16,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.learnwithsajib.barta.ModelClass.User
 import com.learnwithsajib.barta.databinding.ActivityMainBinding
 import com.learnwithsajib.barta.databinding.NavHeaderBinding
-import de.hdodenhof.circleimageview.CircleImageView
 
 ////50
 class MainActivity : AppCompatActivity() {

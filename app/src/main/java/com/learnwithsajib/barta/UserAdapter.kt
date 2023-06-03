@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.learnwithsajib.barta.ModelClass.User
 import com.learnwithsajib.barta.databinding.ItemUserListBinding
 
 class UserAdapter(var user: UserAdapter.UserListener) :

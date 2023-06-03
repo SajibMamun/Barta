@@ -1,4 +1,4 @@
-package com.learnwithsajib.barta.ModelClass
+package com.learnwithsajib.barta
 
 data class User(
 
