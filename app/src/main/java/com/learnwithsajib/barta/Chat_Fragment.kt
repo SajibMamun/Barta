@@ -9,7 +9,10 @@ import android.widget.Toast
 import coil.load
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.learnwithsajib.barta.databinding.FragmentChatBinding
@@ -18,10 +21,10 @@ import com.learnwithsajib.barta.databinding.FragmentChatBinding
 class Chat_Fragment : Fragment() {
     lateinit var binding: FragmentChatBinding
     var firebaseUser: FirebaseUser? = null
-
-
+    var chats: MutableList<Chat> = mutableListOf()
     lateinit var firebaseDatabaseReference: DatabaseReference
     lateinit var mAuth: FirebaseAuth
+    var currentUserID=""
 
 
     override fun onCreateView(
@@ -32,11 +35,22 @@ class Chat_Fragment : Fragment() {
         binding = FragmentChatBinding.inflate(inflater, container, false)
 
 
+
+        FirebaseAuth.getInstance().currentUser?.let {
+            firebaseUser=it
+            currentUserID=it.uid
+        }
+
+
+
+
+
+
         var recieverUID: String = requireArguments().getString("uid").toString()
         var recieverImage: String = requireArguments().getString("image").toString()
         var SenderUID: String = requireArguments().getString("senderuid").toString()
         var SenderIMG: String = requireArguments().getString("senderimg").toString()
-        Toast.makeText(requireContext(),"${SenderUID}",Toast.LENGTH_SHORT).show()
+
         binding.receiverImgid.load(recieverImage)
         binding.senderImgid.load(SenderIMG)
 
@@ -44,7 +58,30 @@ class Chat_Fragment : Fragment() {
         firebaseDatabaseReference = database.reference.child("chat")
 
 
+firebaseDatabaseReference.addValueEventListener(object : ValueEventListener{
+    override fun onDataChange(snapshot: DataSnapshot) {
 
+
+        chats.clear()
+        snapshot.children.forEach {
+            val chat: Chat = it.getValue<Chat>(Chat::class.java)!!
+
+
+            if (chat.sender == currentUserID && chat.receiver == recieverUID || chat.sender == recieverUID && chat.receiver == currentUserID)
+            {
+                chats.add(chat)
+
+            }
+        }
+        var adapter = ChatAdapter(chats, currentUserID)
+
+        binding.chatRecyclerviewid.adapter = adapter
+    }
+    override fun onCancelled(error: DatabaseError) {
+
+    }
+
+} )
 
 
 

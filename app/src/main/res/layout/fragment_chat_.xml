@@ -41,6 +41,7 @@
         android:id="@+id/chatRecyclerviewid"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout1id"
         android:layout_margin="10dp"
