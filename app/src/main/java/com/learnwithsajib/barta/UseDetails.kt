@@ -33,7 +33,6 @@ class UseDetails : Fragment() {
         binding.emailetid.text=userEmail
         binding.Nameetid.text=userName
         binding.contactetid.text=userContact
-        binding.Passwordetid.text=userPassword
         binding.profileimgid.load(userImage)
 
         return binding.root

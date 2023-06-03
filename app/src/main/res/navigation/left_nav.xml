@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_online_to_useDetails"
             app:destination="@id/useDetails" />
+        <action
+            android:id="@+id/action_online_to_chat_Fragment"
+            app:destination="@id/chat_Fragment" />
 
     </fragment>
     <fragment
@@ -52,4 +55,9 @@
         android:name="com.learnwithsajib.barta.UseDetails"
         android:label="User"
         tools:layout="@layout/fragment_use_details" />
+    <fragment
+        android:id="@+id/chat_Fragment"
+        android:name="com.learnwithsajib.barta.Chat_Fragment"
+        android:label="Conversation"
+        tools:layout="@layout/fragment_chat_" />
 </navigation>

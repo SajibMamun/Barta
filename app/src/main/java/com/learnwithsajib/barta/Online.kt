@@ -34,6 +34,7 @@ class Online : Fragment(), UserAdapter.UserListener {
         binding = FragmentOnlineBinding.inflate(layoutInflater, container, false)
 
         mAuth = FirebaseAuth.getInstance()
+        firebaseUser=FirebaseAuth.getInstance().currentUser
 
 
         return binding.root
@@ -50,7 +51,15 @@ class Online : Fragment(), UserAdapter.UserListener {
                     snapshot.children.forEach {
                         var user: User = it.getValue(User::class.java)!!
 
-                        userList.add(user)
+
+
+                        if(firebaseUser!=null)
+                        {
+                            if(user.userId!=firebaseUser!!.uid){
+                                userList.add(user)
+                            }
+                        }
+
 
                     }
 

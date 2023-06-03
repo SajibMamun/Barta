@@ -49,21 +49,8 @@
         android:drawablePadding="10dp"
         android:hint="Phone" />
 
-    <TextView
-        android:id="@+id/Passwordetid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="20dp"
-        android:drawableLeft="@drawable/password"
-        android:drawablePadding="10dp"
-        android:hint="password"
-        android:inputType="textPassword"/>
 
 
 
-        />
 
 </LinearLayout>
